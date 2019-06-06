@@ -2,6 +2,7 @@ body {
   position: relative;
   width: 99%;
   height: 98vh;
+  overscroll-behavior: none;
 }
 
 div {

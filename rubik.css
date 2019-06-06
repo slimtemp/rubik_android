@@ -149,12 +149,12 @@ div {
   top: 200px;
 }
 
-.middle {
-  transform: translateZ(-100px);
+.front {
+  transform: translateZ(100px);
 }
 
 .back {
-  transform: translateZ(-200px);
+  transform: translateZ(-100px);
 }
 
 .front > .side1{

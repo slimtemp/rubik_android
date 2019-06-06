@@ -357,84 +357,7 @@ var color_change_matrix_90_deg = {
        ".back.i9 > .side6",
        ".back.i3 > .side6"]
 }
-
-// plus 1 button
-document.querySelectorAll('.buttons button')[0].addEventListener('click', () =>
-        { document.querySelector('#degree').value = 1
-          // rotating direction is 'x', 'y' or 'z' only
-          let rotate_direction = document.querySelector('#direction').value
-          // target row or column is '1', '2' or '3' only
-          let target_row_or_column = parseInt(document.querySelector('#row_col').value)
-          let degree = parseInt(document.querySelector('#degree').value)
-          rotate(rotate_direction, target_row_or_column, degree)
-        })
-// minus 1 button
-document.querySelectorAll('.buttons button')[1].addEventListener('click', () =>
-        { document.querySelector('#degree').value = -1
-          // rotating direction is 'x', 'y' or 'z' only
-          let rotate_direction = document.querySelector('#direction').value
-          // target row or column is '1', '2' or '3' only
-          let target_row_or_column = parseInt(document.querySelector('#row_col').value)
-          let degree = parseInt(document.querySelector('#degree').value)
-          rotate(rotate_direction, target_row_or_column, degree)
-        })
-// plus 10 button
-document.querySelectorAll('.buttons button')[2].addEventListener('click', () =>
-        { document.querySelector('#degree').value = 10
-          // rotating direction is 'x', 'y' or 'z' only
-          let rotate_direction = document.querySelector('#direction').value
-          // target row or column is '1', '2' or '3' only
-          let target_row_or_column = parseInt(document.querySelector('#row_col').value)
-          let degree = parseInt(document.querySelector('#degree').value)
-          rotate(rotate_direction, target_row_or_column, degree)
-        })
-// minus 10 button
-document.querySelectorAll('.buttons button')[3].addEventListener('click', () =>
-        { document.querySelector('#degree').value = -10
-          // rotating direction is 'x', 'y' or 'z' only
-          let rotate_direction = document.querySelector('#direction').value
-          // target row or column is '1', '2' or '3' only
-          let target_row_or_column = parseInt(document.querySelector('#row_col').value)
-          let degree = parseInt(document.querySelector('#degree').value)
-          rotate(rotate_direction, target_row_or_column, degree)
-        })
-// rotate 90 button
-document.querySelectorAll('.buttons button')[4].addEventListener('click', () => 
-        { document.querySelector('#degree').value = 90
-          // rotating direction is 'x', 'y' or 'z' only
-          let rotate_direction = document.querySelector('#direction').value
-          // target row or column is '1', '2' or '3' only
-          let target_row_or_column = parseInt(document.querySelector('#row_col').value)
-          let degree = parseInt(document.querySelector('#degree').value)
-          rotate(rotate_direction, target_row_or_column, degree)
-        })
-// get current degrees button
-document.querySelectorAll('.buttons button')[5].addEventListener('click', () => 
-        {
-          console.log(getCurrentDegrees())
-        })
-// change view angles
-document.querySelectorAll('.buttons button')[6].addEventListener('click', () => 
-        {
-          let cube = document.querySelector('.cube')
-          let current_degrees = getRotateDegreesFromMatrix3dArray(getMatrix3dArray(cube))
-          console.log(current_degrees)
-          let new_transform = 'rotateX(' + (current_degrees[0] + 90) + 'deg) ' +
-                              'rotateY(' + (current_degrees[1] + 90) + 'deg) ' +
-                              'rotateZ(' + (current_degrees[2] + 90) + 'deg)'
-          cube.style.transform = new_transform
-          cube.style.transition = 'transform 1s linear'
-        })
-// rotate any degree
-document.querySelectorAll('.buttons button')[7].addEventListener('click', () =>
-        {
-          // rotating direction is 'x', 'y' or 'z' only
-          let rotate_direction = document.querySelector('#direction').value
-          // target row or column is '1', '2' or '3' only
-          let target_row_or_column = parseInt(document.querySelector('#row_col').value)
-          let degree = parseInt(document.querySelector('#degree').value)
-          rotate(rotate_direction, target_row_or_column, degree)
-        })
+  
 
 
 function resetCube(target_elems, rotate_direction, target_row_or_column, is_clockwise) {
@@ -1213,48 +1136,7 @@ function rotate3d_to_matrix3d(x1, y1, z1, deg) {
                      + m31 + ', ' + m32 + ', ' + m33 + ', ' + m34 + ', ' 
                      + m41 + ', ' + m42 + ', ' + m43 + ', ' + m44 + ')'
 }
-
-/*
-// slide bar
-document.getElementById('rotatex_slider').addEventListener('input', function (e) {
-  let old_degree_value = parseInt(document.getElementById('rotatex_value').innerHTML)
-  let new_degree_value = parseInt(e.target.value)
-  
-  document.getElementById('rotatex_value').innerHTML = new_degree_value
-  let added_arr_matrix3d = getArrayFromMatrixString(rotate3d_to_matrix3d(1, 0, 0, new_degree_value - old_degree_value))
-  
-  //get current matrix3d
-  let cube = document.getElementsByClassName('cube')[0]
-  let current_arr_matrix3d = getArrayFromMatrixString(window.getComputedStyle(cube).transform)
-  
-  // matrix production to get new transform matrix, added matrix in the back
-  let new_matrix3d = matrix3dProduct(current_arr_matrix3d, added_arr_matrix3d)
-  
-  //update transform
-  cube.style.transform = getStyleFromMatrix3dArray(new_matrix3d)
-})
-
-
-document.getElementById('rotatey_slider').addEventListener('input', function (e) {
-  let old_degree_value = parseInt(document.getElementById('rotatey_value').innerHTML)
-  let new_degree_value = parseInt(e.target.value)
-  
-  document.getElementById('rotatey_value').innerHTML = new_degree_value
-  let added_arr_matrix3d = getArrayFromMatrixString(rotate3d_to_matrix3d(0, 1, 0, new_degree_value - old_degree_value))
-  
-  //get current matrix3d
-  let cube = document.getElementsByClassName('cube')[0]
-  let current_arr_matrix3d = getArrayFromMatrixString(window.getComputedStyle(cube).transform)
-  
-  // matrix production to get new transform matrix, added matrix in the back
-  let new_matrix3d = matrix3dProduct(current_arr_matrix3d, added_arr_matrix3d)
-  
-  //update transform
-  cube.style.transform = getStyleFromMatrix3dArray(new_matrix3d)
-})
-*/
-
-
+ 
 
 //touch events
 
@@ -1406,8 +1288,8 @@ function random123(step) {
   }
   return arr_result
 }
-
-document.getElementsByClassName('randomize_button')[0].addEventListener('click', function (){
+ 
+document.getElementsByClassName('randomizer')[0].addEventListener('click', function (){
   let arr_steps = random123(10)
   let i=0;
   let flag = setInterval(() => {
@@ -1416,4 +1298,4 @@ document.getElementsByClassName('randomize_button')[0].addEventListener('click',
       clearInterval(flag)
     }
   }, 1200);
-})
+}) 

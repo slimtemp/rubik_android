@@ -1,7 +1,8 @@
 body {
-  position: relative;
+  position: absolute;
   width: 99%;
   height: 98vh;
+  overscroll-behavior: none;
 }
 
 .wrapper {

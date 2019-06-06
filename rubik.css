@@ -19,40 +19,44 @@ body {
 div {
   user-select: none;
 }
-
+ 
 .randomize {
+  display: block;
+  position: relative;
+  box-sizing: border-box; 
+  width: 10%;
+  margin: 30px;
+    /*
+  display: block;
   position: relative;
   width: 40%;
-  left: calc(50% - 150px);
-  top: calc(50% + 220px);
-  font-size: 2em;
+  left: calc(50% + 300px);
+  top: calc(50% + 20px);
+  font-size: 4em;
   font-weight: 800;
+    */
 }
 
 .randomize > button {
-  font-size: 1em;
-}
-
-.randomize > input {
-  font-size: 1em;
   width: 50px;
-}
+  font-size: 1em;
+} 
 
 .spinner {
   display: block;
   position: relative;
   box-sizing: border-box;
-  height: 120px;
-  width: 120px;
+  height: 200px;
+  width: 200px;
   margin: 30px;
   border: 0px solid lightgrey;
   border-radius: 50%;
-  box-shadow: lightgray 0px -40px 0px 48px inset;
+  box-shadow: lightgray 0px -65px 0px 80px inset;
   position: absolute;
   /* left = right of horizontal slider */
-  left: calc(50% + 250px);
-  top: calc(50% + 150px);
   transition: box-shadow 0.5s;
+  left: calc(50% + 150px);
+  top: calc(50% + 150px);
 } 
 
 .cube{

@@ -1265,19 +1265,19 @@ document.addEventListener('touchstart', function (e) {
   touch_y = e.touches[0].clientY
   move_direction = 'none'
   if(e.target === document.getElementsByClassName('spinner')[0]) {
-    document.getElementsByClassName('spinner')[0].style.boxShadow = 'rgb(255, 83, 26) 0px -40px 0px 48px inset'
+    document.getElementsByClassName('spinner')[0].style.boxShadow = 'rgb(255, 83, 26) 0px -65px 0px 80px inset'
   }
 })
 
 document.addEventListener('touchend', function (e) {
   if(e.target === document.getElementsByClassName('spinner')[0]) {
-    document.getElementsByClassName('spinner')[0].style.boxShadow = 'lightgray 0px -40px 0px 48px inset'
+    document.getElementsByClassName('spinner')[0].style.boxShadow = 'lightgray 0px -65px 0px 80px inset'
   }
 })
 
 document.addEventListener('touchmove', function (e) {
   // when finger is on the spinner, spin; or else move up-down or left-right to rotate X or Y
-  if(document.getElementsByClassName('spinner')[0].style.boxShadow === 'rgb(255, 83, 26) 0px -40px 0px 48px inset') {
+  if(document.getElementsByClassName('spinner')[0].style.boxShadow === 'rgb(255, 83, 26) 0px -65px 0px 80px inset') {
     let old_degree_value = parseInt(document.getElementsByClassName('spinner')[0].style.transform.replace('rotate(', ''))
     let new_degree_value
     
@@ -1352,7 +1352,7 @@ document.addEventListener('touchmove', function (e) {
         
           let added_arr_matrix3d = getArrayFromMatrixString(
               rotate3d_to_matrix3d(
-                  1, 0, 0, (new_degree_value - old_degree_value) * 180 / (document.body.clientHeight * 0.5) 
+                  1, 0, 0, (old_degree_value - new_degree_value) * 180 / (document.body.clientHeight * 0.5) 
             )
           )
 

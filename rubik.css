@@ -1,8 +1,8 @@
 body {
   position: absolute;
   width: 99%;
-  height: 98vh;
   z-index: -2;
+  overscroll-behavior: none;
 }
 
 .wrapper {

@@ -1557,13 +1557,102 @@ function random123(step) {
   return arr_result
 }
  
+
+function translation2matrix3d(x, y, z) { 
+  let tx = x.replace('px', '') - 0
+  let ty = y.replace('px', '') - 0
+  let tz = z.replace('px', '') - 0
+  return [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, tx, ty, tz, 1]
+}
+
+
+
+function preRandomizeEffect() {
+  // randomize for pre-start effect (minor translate3d for each block)
+  // get all blocks
+  let all_blocks = document.querySelectorAll('.cube > div')
+
+  let original_transformations = []
+  for(let i=0; i<all_blocks.length; i++) {
+    // randomized direction(x, y, z) is for translation direction
+    // randomized index 1 : positive translation; index 2 : negative translation; index 3 : 0 translation
+    let random_result = random123(1)[0]
+    let direction = random_result.direction
+    let index = random_result.index
+    let added_translation_matrix
+    let neg_or_pos 
+    switch(index) {
+      case 1:
+          neg_or_pos = '5px'
+          break
+      case 2:
+          neg_or_pos = '-5px'
+          break
+      case 3:
+          neg_or_pos = '0px'
+          break
+    }
+
+    switch(direction) {
+      case 'x':
+          added_translation_matrix = translation2matrix3d(neg_or_pos, '0px', '0px')
+          break
+      case 'y':
+          added_translation_matrix = translation2matrix3d('0px', neg_or_pos, '0px')
+          break
+      case 'z':
+          added_translation_matrix = translation2matrix3d('0px', '0px', neg_or_pos)
+          break
+    }
+    let current_arr_matrix3d
+    if(getComputedStyle(all_blocks[i]).transform === 'none') {
+      current_arr_matrix3d = [1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1]
+      let item = {}
+      item.element = all_blocks[i];
+      item.transformation = 'none'
+      original_transformations[original_transformations.length] = item
+    } else {
+      current_arr_matrix3d = getArrayFromMatrixString(getComputedStyle(all_blocks[i]).transform)
+      let item = {}
+      item.element = all_blocks[i];
+      item.transformation = getComputedStyle(all_blocks[i]).transform
+      original_transformations[original_transformations.length] = item
+    }
+    let new_arr_matrix3d = matrix3dProduct(current_arr_matrix3d, added_translation_matrix)
+    all_blocks[i].style.transform = getStyleFromMatrix3dArray(new_arr_matrix3d)
+  }
+  //return value to retain original tranformations
+  return original_transformations
+}
+
 document.getElementsByClassName('randomizer')[0].addEventListener('click', function (){
+  document.getElementsByClassName('rotate_gif')[0].src = 'rotate_cube_color.gif'
+  
+  let count = 1
+  // get the very first original tranformations
+  let original_transformations = preRandomizeEffect()
+  let flag = setInterval(() => {
+    preRandomizeEffect()
+    if(count >= 109) {
+      clearInterval(flag)
+      //reset transformations
+      for(let i=0; i<original_transformations.length; i++) {
+        original_transformations[i].element.style.transform = original_transformations[i].transformation
+      }
+    }
+    count++
+  }, 100)
+
+  /*
+  // randomize for rotation
   let arr_steps = random123(10)
   let i=0;
   let flag = setInterval(() => {
     rotateByParam(arr_steps[i].direction, arr_steps[i].index)
     if(++i >= arr_steps.length) {
       clearInterval(flag)
+      document.getElementsByClassName('rotate_gif')[0].src = 'rotate_cube.gif'
     }
   }, 1200);
+  */
 }) 

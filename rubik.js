@@ -1625,26 +1625,7 @@ function preRandomizeEffect() {
   return original_transformations
 }
 
-document.getElementsByClassName('randomizer')[0].addEventListener('click', function (){
-  document.getElementsByClassName('rotate_gif')[0].src = 'rotate_cube_color.gif'
-  
-  let count = 1
-  // get the very first original tranformations
-  let original_transformations = preRandomizeEffect()
-  let flag = setInterval(() => {
-    preRandomizeEffect()
-    if(count >= 109) {
-      clearInterval(flag)
-      //reset transformations
-      for(let i=0; i<original_transformations.length; i++) {
-        original_transformations[i].element.style.transform = original_transformations[i].transformation
-      }
-    }
-    count++
-  }, 100)
-
-  /*
-  // randomize for rotation
+function randomizingRotation() {
   let arr_steps = random123(10)
   let i=0;
   let flag = setInterval(() => {
@@ -1654,5 +1635,23 @@ document.getElementsByClassName('randomizer')[0].addEventListener('click', funct
       document.getElementsByClassName('rotate_gif')[0].src = 'rotate_cube.gif'
     }
   }, 1200);
-  */
+}
+
+document.getElementsByClassName('randomizer')[0].addEventListener('click', function (){
+  document.getElementsByClassName('rotate_gif')[0].src = 'rotate_cube_color.gif' 
+  let count = 1
+  // get the very first original tranformations
+  let original_transformations = preRandomizeEffect()
+  let flag = setInterval(() => {
+    preRandomizeEffect()
+    if(count >= 19) {
+      clearInterval(flag)
+      //reset transformations
+      for(let i=0; i<original_transformations.length; i++) {
+        original_transformations[i].element.style.transform = original_transformations[i].transformation
+      }
+      randomizingRotation()
+    }
+    count++
+  }, 100)
 }) 

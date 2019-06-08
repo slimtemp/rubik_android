@@ -1255,10 +1255,22 @@ function rotate3d_to_matrix3d(x1, y1, z1, deg) {
 //touch events
 
 document.addEventListener('touchstart', function (e) {
-  //remove arrows
-  document.querySelectorAll('.arrow').forEach( function (e) {
-    e.remove()
-  });
+  // click outside the cube to hide arrows
+  let ancestor_chain = getAllAncestors(e.target);
+  let i;
+  for(i=0; i<ancestor_chain.length; i++) {
+    if(ancestor_chain[i].className === 'cube') {
+      break
+    }
+  }
+  if(i === ancestor_chain.length && !e.target.classList.contains('arrow') ) {
+    // no .cube in the chain, outside the cube, 
+    // and not in the 4 global arrows
+    // remove all arrows
+    document.querySelectorAll('.arrow').forEach( function (e) {
+      e.remove()
+    });
+  }
 
   touch_x = e.touches[0].clientX
   touch_y = e.touches[0].clientY
